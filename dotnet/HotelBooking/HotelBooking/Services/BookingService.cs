@@ -45,7 +45,7 @@ public class BookingService : IBookingService
         return createdBooking.Entity;
     }
 
-    public async Task<List<Booking>> TakeBookingsWithLargesBill(int count)
+    public async Task<List<Booking>> TakeBookingsWithLargestBill(int count)
     {
         var bookings = await _context
             .Bookings

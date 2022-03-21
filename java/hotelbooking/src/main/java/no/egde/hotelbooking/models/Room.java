@@ -1,9 +1,11 @@
 package no.egde.hotelbooking.models;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Entity
 public class Room {
     private static final Map<RoomType, Integer> prices = new HashMap<>(Map.ofEntries(
         Map.entry(RoomType.SUITE, 10000),
@@ -12,8 +14,15 @@ public class Room {
         Map.entry(RoomType.BASIC, 1000)
     ));
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Enumerated(EnumType.STRING)
     private RoomType roomType;
+
+    @OneToMany
+    @JoinColumn(name = "bookingId", referencedColumnName = "id")
     private List<Booking> bookings;
 
     public Room(RoomType type) {
@@ -48,13 +57,13 @@ public class Room {
         this.bookings = bookings;
     }
 
-    public int getRoomPrice(RoomType type) {
-        return prices.get(type);
+    public Integer getRoomPrice() {
+        return prices.get(roomType);
     }
 
-    public int getTotalEarnings(RoomType roomType) {
+    public int getTotalEarnings() {
         return getBookings().stream()
-                .mapToInt(item -> item.getBill(roomType))
+                .mapToInt(Booking::getBill)
                 .sum();
     }
 }

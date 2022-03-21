@@ -5,20 +5,17 @@ import no.egde.hotelbooking.models.Booking;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class BookingService {
+public class BookingsService {
 
     private final BookingRepository bookingRepository;
 
     @Inject
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingsService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 
@@ -35,7 +32,11 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<Booking> takeBookingsWithLargeBill(int count) {
-        return Collections.emptyList();
+    public List<Booking> takeBookingsWithLargestBill(int count) {
+        Iterable<Booking> bookings = bookingRepository.findAll();
+        return StreamSupport.stream(bookings.spliterator(), false)
+                .sorted(Comparator.comparing(Booking::getBill).reversed())
+                .limit(count)
+                .collect(Collectors.toList());
     }
 }

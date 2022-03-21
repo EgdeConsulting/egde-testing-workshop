@@ -1,24 +1,25 @@
 package no.egde.hotelbooking.services;
 
 import no.egde.hotelbooking.data.CustomerRepository;
+import no.egde.hotelbooking.models.Booking;
 import no.egde.hotelbooking.models.Customer;
 import no.egde.hotelbooking.models.CustomerWithTotalPayment;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class CustomerService {
+public class CustomersService {
 
     private final CustomerRepository customerRepository;
 
     @Inject
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomersService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -35,6 +36,11 @@ public class CustomerService {
     }
 
     public List<CustomerWithTotalPayment> takeHighestPayingCustomers(int count) {
-        return Collections.emptyList();
+        Iterable<Customer> customers = customerRepository.findAll();
+        return StreamSupport.stream(customers.spliterator(), false)
+                .map(e -> new CustomerWithTotalPayment(e, e.getBookings().stream().mapToInt(Booking::getBill).sum()))
+                .sorted(Comparator.comparing(CustomerWithTotalPayment::getAmount).reversed())
+                .limit(count)
+                .collect(Collectors.toList());
     }
 }

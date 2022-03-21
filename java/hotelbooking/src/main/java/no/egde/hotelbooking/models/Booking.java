@@ -1,15 +1,26 @@
 package no.egde.hotelbooking.models;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDateTime checkIn;
-    private LocalDateTime CheckOut;
+    private LocalDateTime checkOut;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customerId", referencedColumnName = "id")
     private Customer customer;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "roomId", referencedColumnName = "id")
     private Room room;
+
     private int stayLength;
-    private int bill;
 
     public int getId() {
         return id;
@@ -28,11 +39,11 @@ public class Booking {
     }
 
     public LocalDateTime getCheckOut() {
-        return CheckOut;
+        return checkOut;
     }
 
     public void setCheckOut(LocalDateTime checkOut) {
-        CheckOut = checkOut;
+        this.checkOut = checkOut;
     }
 
     public Customer getCustomer() {
@@ -59,7 +70,7 @@ public class Booking {
         this.stayLength = stayLength;
     }
 
-    public int getBill(RoomType roomType) {
-        return getStayLength() * getRoom().getRoomPrice(roomType);
+    public int getBill() {
+        return getStayLength() * getRoom().getRoomPrice();
     }
 }
