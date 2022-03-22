@@ -73,4 +73,6 @@ public class Booking {
     public int getBill() {
         return getStayLength() * getRoom().getRoomPrice();
     }
+
+
 }

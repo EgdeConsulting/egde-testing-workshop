@@ -21,10 +21,6 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
-    @OneToMany
-    @JoinColumn(name = "bookingId", referencedColumnName = "id")
-    private List<Booking> bookings;
-
     public Room(RoomType type) {
         this.roomType = type;
     }
@@ -49,21 +45,7 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
     public Integer getRoomPrice() {
         return prices.get(roomType);
-    }
-
-    public int getTotalEarnings() {
-        return getBookings().stream()
-                .mapToInt(Booking::getBill)
-                .sum();
     }
 }

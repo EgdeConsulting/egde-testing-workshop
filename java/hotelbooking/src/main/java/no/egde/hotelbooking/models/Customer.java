@@ -11,10 +11,6 @@ public class Customer {
     private String name;
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "bookingId", referencedColumnName = "id")
-    private List<Booking> bookings;
-
     public int getId() {
         return id;
     }
@@ -37,14 +33,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
     }
 }
 
