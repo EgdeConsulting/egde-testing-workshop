@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "02a001bd-37e5-457d-95e5-1eccc69e05d1",
+		"name": "Testing Workshop - Hotel Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "rooms",
+			"item": [
+				{
+					"name": "get rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get room by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create room",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"Suite\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5089/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get most popular rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms/popular/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms",
+								"popular",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get room earnings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get total earnings from room",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms/earnings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms",
+								"earnings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get available rooms today",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/rooms/available/today",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"rooms",
+								"available",
+								"today"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "get customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/customers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Billy\",\r\n  \"email\": \"billy@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5089/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "take highest paying customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/customers/paying/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"customers",
+								"paying",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "get bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get booking by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/bookings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkIn\": \"2022-03-22\",\r\n    \"checkOut\": \"2022-03-24\",\r\n    \"customerId\": 1,\r\n    \"roomId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5089/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "take largest booking bills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5089/bookings/largestbilling/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5089",
+							"path": [
+								"bookings",
+								"largestbilling",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

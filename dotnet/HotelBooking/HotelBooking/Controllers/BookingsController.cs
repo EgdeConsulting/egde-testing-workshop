@@ -40,7 +40,7 @@ namespace HotelBooking.Controllers
         [HttpGet("largestbilling/{count}")]
         public async Task<ActionResult<List<Booking>>> TakeBookingsWithLargesBill(int count)
         {
-            var bookingsWithLargesBill = await _bookingService.TakeBookingsWithLargesBill(count);
+            var bookingsWithLargesBill = await _bookingService.TakeBookingsWithLargestBill(count);
             return Ok(bookingsWithLargesBill);
         }
     }

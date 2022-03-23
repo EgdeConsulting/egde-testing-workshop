@@ -57,5 +57,13 @@ namespace HotelBooking.Controllers
             var earnings = await _roomService.GetEarningsByRoomId(id);
             return earnings == null ? NotFound("Room id was not found") : Ok(earnings);
         }
+
+        [HttpGet("available/today")]
+        public async Task<ActionResult<List<Room>>> GetAvailableRoomsToday()
+        {
+            var availableRooms = await _roomService.GetAvailableRoomsToday();
+            return Ok(availableRooms);
+        }
+
     }
 }
