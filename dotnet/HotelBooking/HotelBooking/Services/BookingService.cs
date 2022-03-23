@@ -9,7 +9,7 @@ public interface IBookingService
     Task<IEnumerable<Booking>> GetBookings();
     Task<Booking?> GetBookingById(int id);
     Task<Booking> PostBooking(Booking booking);
-    Task<List<Booking>> TakeBookingsWithLargesBill(int count);
+    Task<List<Booking>> TakeBookingsWithLargestBill(int count);
 }
 
 public class BookingService : IBookingService

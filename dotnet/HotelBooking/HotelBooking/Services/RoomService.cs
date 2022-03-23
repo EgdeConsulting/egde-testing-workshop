@@ -9,10 +9,10 @@ public interface IRoomService
     Task<Room> CreateRoom(Room room);
     Task<Room?> GetRoomById(int id);
     Task<List<Room>> GetRooms();
-
     List<Room> TakeMostPopularRooms(int count);
     Task<Dictionary<int, int>> GetRoomEarnings();
     Task<int?> GetEarningsByRoomId(int id);
+    Task<List<Room>> GetAvailableRoomsToday();
 }
 
 public class RoomService : IRoomService
@@ -77,7 +77,27 @@ public class RoomService : IRoomService
         return room?.TotalEarnings();
     }
 
-    private int CountNumberOfDaysBooked(Room room) =>
-        room.Bookings.Sum(booking => booking.StayLength);
+    public async Task<List<Room>> GetAvailableRoomsToday()
+    {
+        var rooms = await _context
+            .Rooms
+            .Include(room => room.Bookings)
+            .ToListAsync();
+        return rooms
+            .Where(room =>
+                !room
+                    .Bookings
+                    .Any(booking => TodayIsBetween(booking.CheckIn, booking.CheckOut))
+            )
+            .ToList();
+    }
 
+    private static int CountNumberOfDaysBooked(Room room) =>
+        room.Bookings.Sum(booking => booking.StayLength);
+    
+    private static bool TodayIsBetween(DateTime startDate, DateTime endDate)
+    {
+        var today = DateTime.Now;
+        return today > startDate && today < endDate;
+    }
 }
